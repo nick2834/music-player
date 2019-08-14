@@ -1,15 +1,19 @@
 <template>
   <div id="app">
+    <nav-menu></nav-menu>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'musicplayer'
-  }
+import NavMenu from "@/components/navMenu";
+export default {
+  name: "musicplayer",
+  components: { NavMenu }
+};
 </script>
 
 <style>
-  /* CSS */
+@import './assets/css/reset.css';
+/* CSS */
 </style>
