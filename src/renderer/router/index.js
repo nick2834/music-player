@@ -6,13 +6,13 @@ Vue.use(Router)
 export default new Router({
   routes: [{
       path: '/',
-      redirect: '/playlists',
+      redirect: '/home',
       hidden: true
     },
     {
-      path: '/playlists',
-      name: 'Playlists',
-      component: require('@/views/Playlists/Playlists').default
+      path: '/home',
+      name: 'Home',
+      component: require('@/views/Home').default
     },
     {
       path: '*',

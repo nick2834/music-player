@@ -18,7 +18,10 @@
         if (process.env.NODE_ENV !== 'development') window.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
       </script>
     <% } %>
-
+      <script>
+        document.addEventListener('dragover', e => e.preventDefault(), false);
+        document.addEventListener('drop', e => e.preventDefault(), false);
+      </script>
     <!-- webpack builds are automatically injected -->
   </body>
 </html>
