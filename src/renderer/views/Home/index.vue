@@ -23,36 +23,32 @@
           </p>
         </nav>
       </aside>
-      <section class="list">
-        <router-link to="/" class="clearfix">
-          <div class="hovered">
-            <i class="ion-android-arrow-forward" />
-          </div>
-          <figure class="item favorite"></figure>
-        </router-link>
-      </section>
+      <recommend-list :recommend="recommend"></recommend-list>
     </main>
   </div>
 </template>
 
 <script>
 import { resource } from "@/api/recommend";
+import RecommendList from "@/components/recommend";
 export default {
   data() {
-    return {};
+    return {
+      recommend: []
+    };
   },
-
-  components: {}, 
+  components: { RecommendList },
 
   computed: {},
 
   mounted() {
-    this.$http.get('http://45.77.178.84:3000/recommend/songs').then(res =>{
-      console.log(res)
-    })
-    resource().then(res =>{
-      console.log(res)
-    })
+    this.$http.get("http://45.77.178.84:3000/recommend/songs").then(res => {
+      console.log(res);
+    });
+    resource().then(({ data }) => {
+      console.log(data);
+      this.recommend = data.recommend;
+    });
   },
 
   methods: {}
@@ -110,32 +106,7 @@ export default {
       cursor: pointer;
     }
   }
-  .list {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 360px;
-    padding-left: 16px;
-    height: calc(100vh - 50px);
-    overflow: hidden;
-    overflow-y: auto;
-    background: #ea4c89;
-    .item {
-      position: relative;
-      height: 120px;
-      padding: 0px;
-      margin: 0px;
-      background-image: linear-gradient(
-        110deg,
-        rgb(255, 103, 0) 0%,
-        rgb(255, 45, 240) 100%
-      );
-      font-family: "Roboto";
-      font-weight: lighter;
-      color: white;
-      overflow: hidden;
-    }
-  }
+
   .clearfix {
     position: relative;
     display: block;

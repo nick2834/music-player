@@ -11,6 +11,9 @@ export default {
 </script>
 
 <style>
-@import './assets/css/reset.css';
+@import "./assets/css/reset.css";
 /* CSS */
+.isLoad {
+  opacity: 1 !important;
+}
 </style>
