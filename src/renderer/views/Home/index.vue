@@ -1,65 +1,96 @@
 <!-- Home -->
 <template>
-  <div class="container">
+  <div
+    class="container"
+    v-loading="loading"
+    element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 1)"
+  >
     <main>
       <aside class="navs">
-        <el-avatar :size="50" icon="el-icon-user-solid">登录</el-avatar>
+        <router-link to="/login" v-if="!userInfo">
+          <el-avatar :size="50" icon="el-icon-user-solid">登录</el-avatar>
+        </router-link>
+        <el-avatar v-else :size="50" :src="userInfo.profile.avatarUrl"></el-avatar>
         <nav class="menu">
           <p>
             <router-link tag="a" to="/search">
-              <i class="el-icon-search"></i> 搜索
+              <i class="ion-ios-search"></i> 搜索
             </router-link>
           </p>
           <p>
-            <router-link tag="a" to="/playlist">Playlist</router-link>
+            <router-link tag="a" to="/playlist">
+              <i class="ion-ios-musical-note"></i> 歌单
+            </router-link>
           </p>
           <p>
             <router-link tag="a" to="/podcasts">Top podcasts</router-link>
           </p>
           <p>
             <router-link tag="a" to="/user">
-              <i class="el-icon-s-custom"></i> 用户中心
+              <i class="ion-android-person"></i> 用户中心
             </router-link>
           </p>
         </nav>
       </aside>
       <recommend-list :recommend="recommend"></recommend-list>
     </main>
+    <div class="back__cover" v-if="!loading && recommend.length > 0">
+      <img :src="coverUrl" alt />
+    </div>
+    <audio-bar></audio-bar>
   </div>
 </template>
 
 <script>
 import { resource } from "@/api/recommend";
 import RecommendList from "@/components/recommend";
+import AudioBar from "@/components/audioBar";
 export default {
   data() {
     return {
-      recommend: []
+      recommend: [],
+      loading: true
     };
   },
-  components: { RecommendList },
-
-  computed: {},
-
-  mounted() {
-    this.$http.get("http://45.77.178.84:3000/recommend/songs").then(res => {
-      console.log(res);
-    });
-    resource().then(({ data }) => {
-      console.log(data);
-      this.recommend = data.recommend;
-    });
+  computed: {
+    userInfo: {
+      get() {
+        return this.$store.state.user.userInfo;
+      }
+    },
+    coverUrl: {
+      get() {
+        return this.$store.state.music.coverUrl;
+      }
+    }
   },
-
-  methods: {}
+  components: { RecommendList, AudioBar },
+  // mounted() {
+  //   resource().then(({ data }) => {
+  //     this.loading = false;
+  //     this.recommend = data.recommend;
+  //     // this.coverUrl = data.recommend[5].picUrl;
+  //     this.$store.commit("SET_COVER", data.recommend[0].picUrl);
+  //   });
+  // },
+  created(){
+    resource().then(({ data }) => {
+      this.loading = false;
+      this.recommend = data.recommend;
+      // this.coverUrl = data.recommend[5].picUrl;
+      this.$store.commit("SET_COVER", data.recommend[0].picUrl);
+    });
+  }
 };
 </script>
 <style scoped lang="scss">
 .container {
-  background: rebeccapurple;
+  // background: rebeccapurple;
   width: 100vw;
   height: 100vh;
-
+  background-color: rgba(0, 0, 0, 0.3);
   .navs {
     padding-left: 50px;
     padding-top: 80px;
@@ -129,5 +160,16 @@ export default {
     transform: scale(0.8);
     transition: 0.5s;
   }
+}
+.back__cover {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #ddd;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -999;
 }
 </style>

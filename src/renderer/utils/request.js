@@ -1,14 +1,14 @@
 import axios from 'axios'
-
+import router from '@/router'
 const service = axios.create({
     baseURL: "http://45.77.178.84:3000/",
     timeout: 5000,
     headers: {
-        'Content-Type': 'application/json',
-        'X-Real-IP': "211.161.244.70"
+        'Content-Type': 'application/json'
     }
 })
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // request interceptor
 service.interceptors.request.use(
     config => {
@@ -24,10 +24,12 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => {
         const res = response.data
+        console.log(response)
         return Promise.resolve(response)
     },
     error => {
-        return Promise.reject(error)
+        console.log(error)
+        router.push('/login')
     }
 )
 

@@ -5,8 +5,16 @@
 </template>
 
 <script>
+import { checkStatus } from "@/api/user";
 export default {
-  name: "musicplayer"
+  name: "musicplayer",
+  mounted() {
+    // checkStatus().then(res => {
+    //   console.log(res);
+    // }).catch(err =>{
+    //   console.log(err)
+    // });
+  }
 };
 </script>
 

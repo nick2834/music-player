@@ -1,87 +1,71 @@
+<!-- 导航 -->
 <template>
-  <!-- <el-menu
-    :default-active="activeIndex"
-    class="el-menu-demo"
-    mode="horizontal"
-    @select="handleSelect"
-  >
-    <el-menu-item index="1">
-      <template slot="title">
-        <i class="el-icon-location"></i>
-        <span slot="title">Playlists</span>
-      </template>
-    </el-menu-item>
-    <el-menu-item index="2">Artists</el-menu-item>
-    <el-menu-item index="3">Albums</el-menu-item>
-    <el-menu-item index="4">Songs</el-menu-item>
-    <el-menu-item index="5">Discover</el-menu-item>
-    <el-menu-item index="6">For You</el-menu-item>
-  </el-menu>-->
-  <ul class="nav_menu">
-    <li index="1" class="active">
-      <i class="el-icon-location"></i>
-      <span slot="title">Playlists</span>
-    </li>
-    <li>
-      <i class="el-icon-location"></i>
-      <span slot="title">Artists</span>
-    </li>
-    <li>
-      <i class="el-icon-location"></i>
-      <span slot="title">Albums</span>
-    </li>
-    <li>
-      <i class="el-icon-location"></i>
-      <span slot="title">Songs</span>
-    </li>
-    <li>
-      <i class="el-icon-location"></i>
-      <span slot="title">Discover</span>
-    </li>
-    <li>
-      <i class="el-icon-location"></i>
-      <span slot="title">For You</span>
-    </li>
-  </ul>
+  <header>
+    <section>
+      <span class="menu"></span>
+      <div>
+        <i class="ion-stats-bars"></i>
+        <i class="ion-android-more-vertical" @click="back"></i>
+      </div>
+    </section>
+  </header>
 </template>
 
 <script>
 export default {
   data() {
-    return {
-      activeIndex: "1",
-      activeIndex2: "1"
-    };
+    return {};
   },
+
+  components: {},
+
+  computed: {},
+
+  mounted() {},
+
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+    back(){
+      this.$router.push('/')
     }
   }
 };
 </script>
-<style lang="scss">
-.nav_menu {
-  width: 100%;
-  background: rgba($color: #ffffff, $alpha: 0.8);
-  height: 100px;
-  display: flex;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  li {
+<style scoped lang="scss">
+header {
+  top: 0;
+  left: 0;
+  z-index: 99;
+  position: absolute;
+  section {
+    width: calc(100vw - 32px);
+    height: 38px;
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    line-height: 20px;
-    color: #1e3d43;
-    text-align: center;
-    cursor: pointer;
+    padding: 0 16px;
+    z-index: 1;
+    position: relative;
+    background: transparent;
+    align-items: center;
+    justify-content: space-between;
     i {
-      line-height: 30px;
+      width: 32px;
+      color: #eee;
+      cursor: pointer;
+      display: inline-block;
       font-size: 20px;
+      text-align: center;
+      margin-right: 4px;
+      &:last-child{
+        margin-right: 0;
+      }
     }
-    &.active {
-      border-bottom: 4px solid #fb6d4c;
-      background: rgba($color: #fb6d4c, $alpha: 0.3);
+    .menu {
+      width: 12px;
+      height: 12px;
+      border: thin solid #ddd;
+      background: #eee;
+      box-sizing: border-box;
+      margin-left: 58px;
+      border-radius: 12px;
     }
   }
 }

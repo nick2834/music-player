@@ -1,7 +1,12 @@
 <!-- 首页推荐歌单 -->
 <template>
   <section class="list">
-    <figure class="item favorite" v-for="(item, index) in recommend" :key="index">
+    <figure
+      class="item favorite"
+      v-for="(item, index) in recommend"
+      :key="index"
+      @click="checkDetail(item)"
+    >
       <figure class="cover__item">
         <img class="cover_back isLoad" :src="item.picUrl" alt />
       </figure>
@@ -27,6 +32,12 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    checkDetail(e) {
+      console.log(e);
+      this.$store.commit("SET_COVER", e.picUrl);
+    }
   }
 };
 </script>
@@ -98,17 +109,22 @@ export default {
         height: 50px;
         width: 50px;
         box-shadow: rgb(12, 11, 11) 0px 0px 24px;
-        .cover{
-            width: 100%;
+        border-radius: 50%;
+        .cover {
+          width: 100%;
         }
       }
       summary {
         display: flex;
         margin-left: 10px;
-        align-items: flex-start;
-        flex-direction: column;
+        align-items: center;
+        // flex-direction: column;
         justify-content: space-between;
         color: #000000;
+        p {
+          width: 200px;
+          margin: 0;
+        }
       }
     }
   }

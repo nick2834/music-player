@@ -5487,6 +5487,11 @@ invert-kv@^2.0.0:
   resolved "https://registry.npm.taobao.org/invert-kv/download/invert-kv-2.0.0.tgz#7393f5afa59ec9ff5f67a27620d11c226e3eec02"
   integrity sha1-c5P1r6Weyf9fZ6J2INEcIm4+7AI=
 
+ionicons201@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/ionicons201/download/ionicons201-1.0.0.tgz#5ce2aa950e907957c7306ca113115a24129d5260"
+  integrity sha1-XOKqlQ6QeVfHMGyhExFaJBKdUmA=
+
 ip-regex@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/ip-regex/download/ip-regex-2.1.0.tgz#fa78bf5d2e6913c911ce9f819ee5146bb6d844e9"
