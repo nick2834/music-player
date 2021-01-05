@@ -54,7 +54,7 @@
     }
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "electron-window-state": "^5.0.3",
     "element-ui": "^2.11.1",
     "ionicons201": "^1.0.0",
